@@ -3,6 +3,8 @@
 > npm install -g typescript ts-node
 
 
+
+
 # what is type?
 type is easy way to refer to the different properties and functions that a value has
 
@@ -20,13 +22,18 @@ console.log(todo.title);
 console.log(todo.completed);
 ```
 
+
+
 # why do we care about types?
 1. Types are used by the typescript compiler to analyze our code for errors.
 2. types allow other engineers to understand what values are flowing arround our codebase.
 
 
+
+
 # type annotations
-code we add to tell typescript what type of value a variable will refer to.
+* code we add to tell typescript what type of value a variable will refer to.
+* in case of function, arguments and return value can be annotated.
 
 ## when do e use Type annotation?
 1. when a function returns the `any` type and we neeed to clarify the value.
@@ -34,8 +41,17 @@ code we add to tell typescript what type of value a variable will refer to.
 3. when we want a variable to have a type that can't be inferred.
 
 
+
+
 # type inference
-typescript tries to figure out what type of value a variable refers to.   
+* typescript tries to figure out what type of value a variable refers to.
+* in case of function, typescript *only* figure out what type of value a function will **return**. *no type inference for argument!!*
 
 ## when do we use type inference?
 **always!!**
+
+
+
+
+# interfaces
+creates a new type, describing the property names and value types of an object
