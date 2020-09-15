@@ -2,7 +2,7 @@ interface Summarizable {
   summary: () => string;
 }
 
-interface Vehicle {
+interface Vehicle_ {
   name: string;
   year: Date;
   broken: boolean;
@@ -18,7 +18,7 @@ interface Beverage {
 }
 
 
-const oldCivic: Vehicle = {
+const oldCivic: Vehicle_ = {
   name: "civic",
   year: new Date("2020-01-01"),
   broken: true,
