@@ -1,12 +1,14 @@
 import { Company } from "./Company";
+import { InfoWindow } from "./InfoWindow";
+import { Map } from "./Map";
+import { Marker } from "./Marker";
 import { User } from "./User";
 
-const GOOGLE_MAPS_API_KEY = "AIzaSyBNLrJhOMz6idD05pzfn5lhA-TAw-mAZCU";
 const root = document.getElementById("root")!;
 
-
 const user = new User();
-console.log(user);
-
 const company = new Company();
-console.log(company);
+const map = new Map(root);
+
+map.addMarker(new Marker(user));
+map.addMarker(new Marker(company));
