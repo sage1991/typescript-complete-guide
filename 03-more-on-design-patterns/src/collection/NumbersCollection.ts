@@ -21,5 +21,4 @@ class NumbersCollection extends AbstractSortable implements Collection<number[]>
   }
 }
 
-
 export { NumbersCollection };

@@ -13,6 +13,7 @@ linkedList.add(100);
 linkedList.add(-3);
 linkedList.add(-10);
 linkedList.add(4);
+linkedList.add(67);
 linkedList.sort();
 
 
