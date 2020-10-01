@@ -1,5 +1,5 @@
 import fs from "fs";
-import { Reader } from "./Reader";
+import { Reader } from "../Reader";
 
 class CsvFileReader implements Reader<string[][]> {
   constructor(private fileName: string) {}

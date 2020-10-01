@@ -1,4 +1,4 @@
-import { Converter } from "./Converter";
+import { Converter } from "../Converter";
 
 class DateConverter implements Converter<string, Date> {
   convert(dateString: string): Date {
