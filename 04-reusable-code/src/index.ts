@@ -6,8 +6,6 @@ import { CsvFileReader } from "./io/CsvFileReader";
 const reader = new CsvFileReader("football.csv");
 const converter = new MatchConverter();
 const matches = converter.convert(reader.read());
-console.log(matches);
-
 
 let homeWin = 0;
 let awayWin = 0;

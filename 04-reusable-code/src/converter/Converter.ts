@@ -1,6 +1,6 @@
 
 
-interface Converter<T, P> {
+interface Converter<T = string, P = any> {
   convert(input: T): P;
 }
 

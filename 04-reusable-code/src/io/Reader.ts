@@ -1,6 +1,6 @@
 
-interface Reader {
-  read(): string;
+interface Reader<T = string> {
+  read(): T;
 }
 
 export { Reader };
