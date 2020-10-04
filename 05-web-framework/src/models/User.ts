@@ -1,29 +1,21 @@
+import { Eventing } from "./Eventing";
+import { Sync } from "./Sync";
+import { Entity } from "./Entity";
+import { Attribute } from "./Attribute";
 
-type Callback = () => void;
-
-interface UserProps {
-  name?: string; 
+interface UserProps extends Entity {
+  name?: string;
   age?: number;
 }
 
-
 class User {
-  constructor(private data: UserProps) {}
+  static URL: string = "http://localhost:3000/users";
+  private events: Eventing = new Eventing();
+  private sync: Sync<UserProps> = new Sync<UserProps>(User.URL);
+  private attributes: Attribute<UserProps>;
 
-  get(propName: string): string | number {
-    return this.data[propName];
-  }
-
-  set(newData: UserProps): void {
-    this.data = Object.assign({}, this.data, newData);
-  }
-
-  on(eventName: string, listener: Callback): void {
-    
-  }
-  
-  trigger(eventName: string): void {
-
+  constructor(data: UserProps) {
+    this.attributes = new Attribute<UserProps>(data);
   }
 }
 
