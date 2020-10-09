@@ -2,13 +2,18 @@
   "users": [
     {
       "id": 1,
-      "name": "kim",
-      "age": 30
+      "name": "harry kane",
+      "age": 27
     },
     {
-      "name": "lucy",
-      "age": 28,
-      "id": 2
+      "id": 2,
+      "name": "sonny",
+      "age": 29
+    },
+    {
+      "id": 3,
+      "name": "dele alli",
+      "age": 24
     }
   ]
 }

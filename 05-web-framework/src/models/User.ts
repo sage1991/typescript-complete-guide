@@ -1,22 +1,28 @@
-import { Eventing } from "./Eventing";
-import { Sync } from "./Sync";
+import { GeneralAttribute } from "./Attribute";
+import { Collection } from "./Collection";
 import { Entity } from "./Entity";
-import { Attribute } from "./Attribute";
+import { Eventing } from "./Eventing";
+import { Model } from "./Model";
+import { APISync } from "./Sync";
 
 interface UserProps extends Entity {
   name?: string;
   age?: number;
 }
 
-class User {
-  static URL: string = "http://localhost:3000/users";
-  private events: Eventing = new Eventing();
-  private sync: Sync<UserProps> = new Sync<UserProps>(User.URL);
-  private attributes: Attribute<UserProps>;
+class User extends Model<UserProps> {
+  private static URL: string = "http://localhost:3000/users";
+  static build(data: UserProps): User {
+    return new User(
+      new GeneralAttribute<UserProps>(data),
+      new Eventing(),
+      new APISync<UserProps>(User.URL)
+    );
+  }
 
-  constructor(data: UserProps) {
-    this.attributes = new Attribute<UserProps>(data);
+  static buildCollection(): Collection<User, UserProps> {
+    return new Collection<User, UserProps>(User.URL, json => User.build(json));
   }
 }
 
-export { User };
+export { User, UserProps };
