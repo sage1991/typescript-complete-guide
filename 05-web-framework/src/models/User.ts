@@ -12,6 +12,7 @@ interface UserProps extends Entity {
 
 class User extends Model<UserProps> {
   private static URL: string = "http://localhost:3000/users";
+
   static build(data: UserProps): User {
     return new User(
       new GeneralAttribute<UserProps>(data),
@@ -22,6 +23,11 @@ class User extends Model<UserProps> {
 
   static buildCollection(): Collection<User, UserProps> {
     return new Collection<User, UserProps>(User.URL, json => User.build(json));
+  }
+
+  setRandomAge(): void {
+    const randomAge = Math.round(Math.random() * 100);
+    this.set({ age: randomAge });
   }
 }
 
