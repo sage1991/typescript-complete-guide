@@ -1,61 +1,29 @@
-import { User } from "../models/User";
+import { User, UserProps } from "../models/User";
 import { EventMap } from "../types/EventMap";
+import { View } from "./View";
 
 
-class UserForm {
-  constructor(private parent: Element, private model: User) {
-    this.bindModel();
-  }
-
-
-  private bindModel() {
-    this.model.on("change", this.render.bind(this));
-  }
-
-
-  eventsMap(): EventMap {
+class UserForm extends View<User, UserProps> {
+  protected eventsMap(): EventMap {
     return {
       "click:.set-age": this.onSetAgeClick.bind(this),
-      "click:.set-name": this.onSetNameClick.bind(this)
+      "click:.set-name": this.onSetNameClick.bind(this),
+      "click:.save-user": this.onSaveClick.bind(this)
     };
   }
 
 
-  template(): string {
+  protected template(): string {
     return `
       <div>
-        <h1>User Form</h1>
-        <div>User name: ${ this.model.get("name") }</div>
-        <div>User age: ${ this.model.get("age") }</div>
-        <input />
-        <button class="set-name">Click Me</button>
+        <input placeholder="${ this.model.get("name") }" />
+        <button class="set-name">Update Name</button>
         <button class="set-age">Set random age</button>
+        <button class="save-user">Save</button>
       </div>
     `;
   }
-  
 
-  render(): void {
-    const template = document.createElement("template");
-    template.innerHTML = this.template();
-    this.bindEvents(template.content);
-    
-    this.parent.innerHTML = "";
-    this.parent.append(template.content);
-  }
-
-
-  private bindEvents(fragment: DocumentFragment): void {
-    const events = this.eventsMap();
-
-    Object.keys(events).forEach(key => {
-      const eventHandler = events[key];
-      const [ eventName, selector ] = key.split(":");
-      fragment.querySelectorAll(selector)
-              .forEach(element => element.addEventListener(eventName, eventHandler))
-    });
-  }
-  
 
   private onSetAgeClick<MouseEvent>(e: MouseEvent): void {
     this.model.setRandomAge();
@@ -66,6 +34,11 @@ class UserForm {
     const input = this.parent.querySelector("input")!;
     const { value } = input;
     this.model.set({ name: value });
+  }
+
+
+  private onSaveClick<MouseEvent>(e: MouseEvent): void {
+    this.model.save();
   }
 }
 
