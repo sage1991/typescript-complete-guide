@@ -1,12 +1,11 @@
 import { Request, Response } from "express";
-import { Controller } from "./decorators/Controller";
-import { GetMapping } from "./decorators/GetMapping";
+import { Controller, GetMapping } from "./decorators";
 
 
-@Controller("/login")
+@Controller("/auth")
 class LoginController {
 
-  @GetMapping()
+  @GetMapping("/login")
   getLogin(request: Request, response: Response): void {
     response.send(`
       <form method="post">
@@ -22,6 +21,9 @@ class LoginController {
       </form>
     `);
   }
+
+
+
 }
 
 
