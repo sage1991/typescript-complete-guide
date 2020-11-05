@@ -1,8 +1,7 @@
+import { Request, Response } from "express";
+import { MetaData } from "./MetaData";
 
-enum RouteMeta {
-  PATH = "path",
-  METHOD = "method"
-}
+type RouteHandler = (request: Request, response: Response) => void;
 
 enum RequestMethod {
   GET = "get",
@@ -12,17 +11,17 @@ enum RequestMethod {
   PATCH = "patch"
 }
 
-function RequestMapping(path = "", method = RequestMethod.GET) {
-  return (proto: any, key: string, descriptor: PropertyDescriptor) => {
-    Reflect.defineMetadata(RouteMeta.PATH, path, proto, key);
-    Reflect.defineMetadata(RouteMeta.METHOD, method, proto, key);
+function RequestMapping(path = "/", method = RequestMethod.GET) {
+  return (proto: any, key: string, descriptor: TypedPropertyDescriptor<RouteHandler>) => {
+    Reflect.defineMetadata(MetaData.PATH, path, proto, key);
+    Reflect.defineMetadata(MetaData.METHOD, method, proto, key);
   }
 }
 
 function routeBinder(method: RequestMethod) {
-  return (path = "") => (proto: any, key: string, descriptor: PropertyDescriptor) => {
-    Reflect.defineMetadata(RouteMeta.PATH, path, proto, key);
-    Reflect.defineMetadata(RouteMeta.METHOD, method, proto, key);
+  return (path = "/") => (proto: any, key: string, descriptor: TypedPropertyDescriptor<RouteHandler>) => {
+    Reflect.defineMetadata(MetaData.PATH, path, proto, key);
+    Reflect.defineMetadata(MetaData.METHOD, method, proto, key);
   }
 }
 
@@ -40,6 +39,5 @@ export {
   DeleteMapping, 
   PutMapping, 
   PatchMapping, 
-  RouteMeta, 
   RequestMethod 
 };

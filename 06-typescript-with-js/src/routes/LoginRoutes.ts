@@ -1,18 +1,9 @@
 import { NextFunction, Request, Response, Router } from "express";
+import { requireAuth } from "../controllers/middleware/RequireAuth";
 
 
 interface RequestWithBody extends Request {
   body: { [ key: string ]: string | undefined };
-}
-
-const requireAuth = (request: Request, response: Response, next: NextFunction): void => {
-  if (request.session?.loggedIn) {
-    next();
-    return;
-  }
-
-  response.status(403);
-  response.send("not permitted");
 }
 
 
