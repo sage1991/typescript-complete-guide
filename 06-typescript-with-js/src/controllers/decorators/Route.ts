@@ -1,7 +1,7 @@
 
 enum RouteMeta {
-    PATH = "path",
-    METHOD = "method"
+  PATH = "path",
+  METHOD = "method"
 }
 
 enum RequestMethod {
@@ -31,6 +31,7 @@ const PostMapping = routeBinder(RequestMethod.POST);
 const DeleteMapping = routeBinder(RequestMethod.DELETE);
 const PutMapping = routeBinder(RequestMethod.PUT);
 const PatchMapping = routeBinder(RequestMethod.PATCH);
+
 
 export { 
   RequestMapping, 
